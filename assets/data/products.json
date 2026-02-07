@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Kulaklık",
+    "description": "Günlük kullanım için konforlu, net ses.",
+    "price": 799.9,
+    "imageAsset": "assets/images/p1.png",
+    "category": "Elektronik",
+    "rating": 4.5
+  },
+  {
+    "id": 2,
+    "title": "Akıllı Saat",
+    "description": "Bildirim, adım sayar, spor modu.",
+    "price": 1299.0,
+    "imageAsset": "assets/images/p2.png",
+    "category": "Elektronik",
+    "rating": 4.2
+  },
+  {
+    "id": 3,
+    "title": "Sırt Çantası",
+    "description": "Laptop bölmeli, suya dayanıklı.",
+    "price": 599.0,
+    "imageAsset": "assets/images/p3.png",
+    "category": "Aksesuar",
+    "rating": 4.7
+  }
+]
