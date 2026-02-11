@@ -1,29 +1,120 @@
 [
   {
     "id": 1,
-    "title": "Kulaklık",
-    "description": "Günlük kullanım için konforlu, net ses.",
+    "title": "Headphones",
+    "description": "Comfortable for everyday use with clear sound.",
     "price": 799.9,
     "imageAsset": "assets/images/p1.png",
-    "category": "Elektronik",
+    "category": "Electronics",
     "rating": 4.5
   },
   {
     "id": 2,
-    "title": "Akıllı Saat",
-    "description": "Bildirim, adım sayar, spor modu.",
+    "title": "Smartwatch",
+    "description": "Notifications, step tracking, and sports mode.",
     "price": 1299.0,
     "imageAsset": "assets/images/p2.png",
-    "category": "Elektronik",
+    "category": "Electronics",
     "rating": 4.2
   },
   {
     "id": 3,
-    "title": "Sırt Çantası",
-    "description": "Laptop bölmeli, suya dayanıklı.",
+    "title": "Backpack",
+    "description": "Laptop compartment and water-resistant material.",
     "price": 599.0,
     "imageAsset": "assets/images/p3.png",
-    "category": "Aksesuar",
+    "category": "Accessories",
     "rating": 4.7
   }
+  ,
+{
+  "id": 4,
+  "title": "Bluetooth Speaker",
+  "description": "Portable, deep bass, 10-hour battery life.",
+  "price": 899.0,
+  "imageAsset": "assets/images/p4.png",
+  "category": "Electronics",
+  "rating": 4.3
+},
+{
+  "id": 5,
+  "title": "Wireless Mouse",
+  "description": "Silent clicks, ergonomic design.",
+  "price": 249.0,
+  "imageAsset": "assets/images/p5.png",
+  "category": "Electronics",
+  "rating": 4.4
+},
+{
+  "id": 6,
+  "title": "Mechanical Keyboard",
+  "description": "RGB lighting, fast response, solid build.",
+  "price": 1499.0,
+  "imageAsset": "assets/images/p6.png",
+  "category": "Electronics",
+  "rating": 4.6
+},
+{
+  "id": 7,
+  "title": "Thermos Bottle",
+  "description": "Keeps drinks hot/cold, stainless steel.",
+  "price": 399.0,
+  "imageAsset": "assets/images/p7.png",
+  "category": "Home",
+  "rating": 4.5
+},
+{
+  "id": 8,
+  "title": "Desk Lamp",
+  "description": "Touch control, 3 color modes.",
+  "price": 349.0,
+  "imageAsset": "assets/images/p8.png",
+  "category": "Home",
+  "rating": 4.2
+},
+{
+  "id": 9,
+  "title": "Yoga Mat",
+  "description": "Non-slip surface, easy to carry.",
+  "price": 299.0,
+  "imageAsset": "assets/images/p9.png",
+  "category": "Sports",
+  "rating": 4.4
+},
+{
+  "id": 10,
+  "title": "Dumbbell Set",
+  "description": "Adjustable weights, home workout ready.",
+  "price": 1199.0,
+  "imageAsset": "assets/images/p10.png",
+  "category": "Sports",
+  "rating": 4.1
+},
+{
+  "id": 11,
+  "title": "Wallet",
+  "description": "Minimal design, multiple card slots.",
+  "price": 199.0,
+  "imageAsset": "assets/images/p11.png",
+  "category": "Accessories",
+  "rating": 4.0
+},
+{
+  "id": 12,
+  "title": "Sunglasses",
+  "description": "UV400 protection, lightweight frame.",
+  "price": 549.0,
+  "imageAsset": "assets/images/p12.png",
+  "category": "Accessories",
+  "rating": 4.3
+},
+{
+  "id": 13,
+  "title": "Power Bank 10000mAh",
+  "description": "Fast charging, dual output ports.",
+  "price": 499.0,
+  "imageAsset": "assets/images/p13.png",
+  "category": "Electronics",
+  "rating": 4.5
+}
 ]
