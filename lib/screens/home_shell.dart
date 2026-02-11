@@ -15,6 +15,15 @@ class _HomeShellState extends State<HomeShell> {
   int index = 0;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Map && args['tab'] is int) {
+      index = args['tab'] as int;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
 
@@ -22,40 +31,30 @@ class _HomeShellState extends State<HomeShell> {
 
     return Scaffold(
       body: pages[index],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: index,
-        onDestinationSelected: (i) => setState(() => index = i),
-        destinations: [
-          const NavigationDestination(
-            icon: Icon(Icons.grid_view),
-            label: 'Katalog',
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: WidgetStateProperty.all(
+            const TextStyle(fontWeight: FontWeight.w600),
           ),
-          const NavigationDestination(
-            icon: Icon(Icons.favorite),
-            label: 'Favoriler',
-          ),
-          NavigationDestination(
-            icon: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const Icon(Icons.shopping_cart),
-                if (state.cartItemCount > 0)
-                  Positioned(
-                    right: -6,
-                    top: -6,
-                    child: CircleAvatar(
-                      radius: 9,
-                      child: Text(
-                        '${state.cartItemCount}',
-                        style: const TextStyle(fontSize: 11),
-                      ),
-                    ),
-                  ),
-              ],
+        ),
+        child: NavigationBar(
+          selectedIndex: index,
+          onDestinationSelected: (i) => setState(() => index = i),
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.grid_view),
+              label: 'Katalog',
             ),
-            label: 'Sepet',
-          ),
-        ],
+            NavigationDestination(
+              icon: Icon(Icons.favorite),
+              label: 'Favoriler',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Sepet',
+            ),
+          ],
+        ),
       ),
     );
   }
