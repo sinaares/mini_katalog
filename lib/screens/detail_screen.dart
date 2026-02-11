@@ -27,7 +27,10 @@ class DetailScreen extends StatelessWidget {
         children: [
           SizedBox(
             height: 260,
-            child: Image.asset(product.imageAsset, fit: BoxFit.contain),
+            child: Hero(
+              tag: 'p_${product.id}',
+              child: Image.asset(product.imageAsset, fit: BoxFit.contain),
+            ),
           ),
           const SizedBox(height: 12),
           Text(product.title, style: Theme.of(context).textTheme.headlineSmall),

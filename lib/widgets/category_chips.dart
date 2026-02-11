@@ -23,10 +23,11 @@ class CategoryChips extends StatelessWidget {
         itemBuilder: (context, i) {
           final c = categories[i];
           final isSel = c == selected;
-          return ChoiceChip(
+          FilterChip(
             label: Text(c),
             selected: isSel,
             onSelected: (_) => onSelected(c),
+            showCheckmark: false,
           );
         },
       ),

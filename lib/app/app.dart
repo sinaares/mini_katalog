@@ -23,8 +23,43 @@ class MiniKatalogApp extends StatelessWidget {
             title: 'Mini Katalog',
             theme: ThemeData(
               useMaterial3: true,
-              brightness: s.darkMode ? Brightness.dark : Brightness.light,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color(0xFF4F46E5), // indigo-ish professional
+                brightness: s.darkMode ? Brightness.dark : Brightness.light,
+              ),
+              scaffoldBackgroundColor: s.darkMode
+                  ? null
+                  : const Color(0xFFF6F7FB),
+              textTheme: const TextTheme(
+                headlineSmall: TextStyle(fontWeight: FontWeight.w700),
+                titleLarge: TextStyle(fontWeight: FontWeight.w700),
+                titleMedium: TextStyle(fontWeight: FontWeight.w600),
+                bodyMedium: TextStyle(height: 1.3),
+              ),
+              appBarTheme: const AppBarTheme(
+                centerTitle: false,
+                titleTextStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              cardTheme: CardThemeData(
+                elevation: 1.5,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+
+              inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide.none,
+                ),
+              ),
             ),
+
             initialRoute: Routes.splash,
             onGenerateRoute: (settings) {
               switch (settings.name) {

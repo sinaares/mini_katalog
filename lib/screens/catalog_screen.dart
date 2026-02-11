@@ -125,13 +125,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
               await future;
             },
             child: ListView(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(16),
               children: [
                 SearchBarBox(
                   value: query,
                   onChanged: (v) => setState(() => query = v),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 CategoryChips(
                   categories: categories,
                   selected: selectedCategory,
@@ -146,8 +146,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 12,
                     crossAxisSpacing: 12,
-                    childAspectRatio: 0.65,
+                    childAspectRatio: 0.62,
                   ),
+
                   itemBuilder: (context, i) {
                     final p = shown[i];
                     final isFav = state.isFavorite(p.id);
