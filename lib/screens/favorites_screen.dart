@@ -6,6 +6,7 @@ import '../app/routes.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/product_card.dart';
 
+// This screen shows the products that the user marked as favorite.
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
 
@@ -14,32 +15,47 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
+  // Repository to load products from JSON
   final repo = ProductRepository();
+
+  // Future list that holds all products
   late Future<List<Product>> future;
 
   @override
   void initState() {
     super.initState();
+
+    // Load products when screen opens
     future = repo.fetchAll();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Access global state (favorites and cart)
     final state = AppScope.of(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Favoriler')),
+
       body: FutureBuilder<List<Product>>(
         future: future,
         builder: (context, snap) {
+          // Show loading while fetching products
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (snap.hasError) return Center(child: Text('Hata: ${snap.error}'));
+
+          // Show error if something goes wrong
+          if (snap.hasError) {
+            return Center(child: Text('Hata: ${snap.error}'));
+          }
 
           final all = snap.data ?? [];
+
+          // Filter products that are marked as favorite
           final favs = all.where((p) => state.isFavorite(p.id)).toList();
 
+          // If there are no favorite products
           if (favs.isEmpty) {
             return const EmptyState(
               title: 'Favori yok',
@@ -49,6 +65,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             );
           }
 
+          // Show favorite products in a grid
           return Padding(
             padding: const EdgeInsets.all(12),
             child: GridView.builder(
@@ -61,9 +78,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
               itemBuilder: (context, i) {
                 final p = favs[i];
+
                 return ProductCard(
                   product: p,
+
+                  // Since this screen only shows favorites,
+                  // isFavorite is always true
                   isFavorite: true,
+
+                  // Navigate to detail screen
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -71,7 +94,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       arguments: {'product': p},
                     );
                   },
+
+                  // Remove or toggle favorite
                   onFavTap: () => state.toggleFavorite(p.id),
+
+                  // Add product to cart
                   onAddToCart: () => state.addToCart(p),
                 );
               },

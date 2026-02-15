@@ -7,10 +7,13 @@ import '../widgets/search_bar.dart';
 import '../widgets/category_chips.dart';
 import '../widgets/product_card.dart';
 
+// Different sorting options for products
 enum SortMode { none, priceAsc, priceDesc, ratingDesc }
 
+// Constant value used for showing all categories
 const String kAllCategory = 'All';
 
+// This screen shows the main catalog with products.
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
 
@@ -19,31 +22,42 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
+  // Repository to load products from JSON
   final repo = ProductRepository();
+
+  // Future list that holds all products
   late Future<List<Product>> future;
 
-  // ✅ key must be inside the State (not global)
+  // Scaffold key is used to open the drawer programmatically
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // Search text
   String query = '';
+
+  // Currently selected category
   String selectedCategory = kAllCategory;
+
+  // Selected sorting mode
   SortMode sortMode = SortMode.none;
 
   @override
   void initState() {
     super.initState();
+
+    // Load products when screen starts
     future = repo.fetchAll();
   }
 
+  // This method applies filtering and sorting to the product list
   List<Product> _apply(List<Product> all) {
     var list = all;
 
-    // categories
+    // Filter by category
     if (selectedCategory != kAllCategory) {
       list = list.where((p) => p.category.trim() == selectedCategory).toList();
     }
 
-    // search
+    // Filter by search text
     final q = query.trim().toLowerCase();
     if (q.isNotEmpty) {
       list = list
@@ -55,7 +69,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           .toList();
     }
 
-    // sort
+    // Apply sorting
     final sorted = [...list];
     switch (sortMode) {
       case SortMode.none:
@@ -70,30 +84,37 @@ class _CatalogScreenState extends State<CatalogScreen> {
         sorted.sort((a, b) => b.rating.compareTo(a.rating));
         break;
     }
+
     return sorted;
   }
 
   @override
   Widget build(BuildContext context) {
+    // Accessing global app state (favorites, cart etc.)
     final state = AppScope.of(context);
 
     return Scaffold(
       key: _scaffoldKey,
 
-      // ✅ Sidebar (Drawer)
+      // Drawer works like a sidebar for categories and settings
       drawer: Drawer(
         child: SafeArea(
           child: FutureBuilder<List<Product>>(
             future: future,
             builder: (context, snap) {
               final all = snap.data ?? [];
+
+              // Getting unique categories from product list
               final unique = all.map((e) => e.category.trim()).toSet().toList()
                 ..sort();
+
               final cats = [kAllCategory, ...unique];
 
               return ListView(
                 children: [
                   const SizedBox(height: 8),
+
+                  // App title inside drawer
                   ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -110,8 +131,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
                     subtitle: const Text('Categories'),
                   ),
+
                   const Divider(),
 
+                  // Category list inside drawer
                   for (final c in cats)
                     ListTile(
                       leading: Icon(
@@ -122,7 +145,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       title: Text(c),
                       selected: selectedCategory == c,
                       onTap: () {
-                        Navigator.pop(context); // close drawer
+                        Navigator.pop(context);
                         setState(() {
                           selectedCategory = c;
                           if (c == kAllCategory) query = '';
@@ -131,6 +154,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
 
                   const Divider(),
+
+                  // Navigate to settings screen
                   ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text('Settings'),
@@ -150,7 +175,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
 
-        // ✅ menu button opens drawer
+        // Menu button opens drawer
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () => _scaffoldKey.currentState?.openDrawer(),
@@ -160,6 +185,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
         title: const Text('Catalog'),
 
         actions: [
+          // Sorting menu
           PopupMenuButton<SortMode>(
             icon: const Icon(Icons.sort),
             onSelected: (v) => setState(() => sortMode = v),
@@ -179,10 +205,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
               ),
             ],
           ),
+
+          // Settings icon
           IconButton(
             onPressed: () => Navigator.pushNamed(context, Routes.settings),
             icon: const Icon(Icons.settings),
           ),
+
           const SizedBox(width: 8),
         ],
       ),
@@ -190,21 +219,25 @@ class _CatalogScreenState extends State<CatalogScreen> {
       body: FutureBuilder<List<Product>>(
         future: future,
         builder: (context, snap) {
-          // ✅ loading
+          // Show loading indicator while fetching data
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
           }
-          // ✅ error
+
+          // Show error message if something goes wrong
           if (snap.hasError) {
             return Center(child: Text('Error: ${snap.error}'));
           }
 
           final all = snap.data ?? [];
 
+          // Unique category list for filter chips
           final unique = all.map((e) => e.category.trim()).toSet().toList()
             ..sort();
+
           final categories = [kAllCategory, ...unique];
 
+          // Apply search, filter and sorting
           final shown = _apply(all);
 
           return RefreshIndicator(
@@ -215,17 +248,21 @@ class _CatalogScreenState extends State<CatalogScreen> {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                // Top card contains search and category chips
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Search bar
                         SearchBarBox(
                           value: query,
                           onChanged: (v) => setState(() => query = v),
                         ),
+
                         const SizedBox(height: 12),
+
                         Row(
                           children: [
                             Text(
@@ -239,7 +276,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                             ),
                           ],
                         ),
+
                         const SizedBox(height: 10),
+
+                        // Category filter chips
                         CategoryChips(
                           categories: categories,
                           selected: selectedCategory,
@@ -252,8 +292,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 12),
 
+                // Product grid
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -266,11 +308,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   ),
                   itemBuilder: (context, i) {
                     final p = shown[i];
+
                     final isFav = state.isFavorite(p.id);
 
                     return ProductCard(
                       product: p,
                       isFavorite: isFav,
+
+                      // Navigate to detail page
                       onTap: () {
                         Navigator.pushNamed(
                           context,
@@ -278,7 +323,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           arguments: {'product': p},
                         );
                       },
+
+                      // Toggle favorite
                       onFavTap: () => state.toggleFavorite(p.id),
+
+                      // Add to cart and show message
                       onAddToCart: () {
                         state.addToCart(p);
                         ScaffoldMessenger.of(context).showSnackBar(
