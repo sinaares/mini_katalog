@@ -77,6 +77,7 @@ flutter run
   <img src="screenshots/p1.png" width="250" alt="Screenshot 1" />
   <img src="screenshots/p2.png" width="250" alt="Screenshot 2" />
   <img src="screenshots/p3.png" width="250" alt="Screenshot 3" />
+  <img src="screenshots/p4.png" width="250" alt="Screenshot 4" />
 </p>
 
 ---
