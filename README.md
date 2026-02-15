@@ -1,82 +1,101 @@
-Mini Katalog – Flutter Catalog App
+# Mini Katalog — Flutter Catalog App
 
-Mini Katalog is a mobile application developed using Flutter that allows
-users to manage and display product listings in a simple and intuitive
-interface. The project was built to demonstrate Flutter development
-skills, UI design, and basic state management concepts.
+[![Flutter](https://img.shields.io/badge/Flutter-SDK-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-Language-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-lightgrey)](#)
 
-------------------------------------------------------------------------
+Mini Katalog is a Flutter-based mobile application for managing and displaying a simple product catalog.  
+It showcases clean UI design with Material components, basic state management, and a clear project structure.
 
-FEATURES
+---
 
--   Display product list
--   Add new catalog items
--   Edit or manage items
--   Responsive and clean UI
--   Fast and lightweight performance
+## ✨ Features
 
-------------------------------------------------------------------------
+- Browse a product list
+- Add new catalog items
+- Edit and manage existing items
+- Responsive, clean UI (Material Design)
+- Fast and lightweight performance
 
-TECHNOLOGIES USED
+---
 
--   Flutter
--   Dart
--   Material Design
--   Android Emulator (for testing)
+## 🛠 Tech Stack
 
-------------------------------------------------------------------------
+- **Flutter**
+- **Dart**
+- **Material Design**
 
-PROJECT STRUCTURE
+Tested with an **Android Emulator**.
 
-lib/ ├── main.dart ├── models/ ├── screens/ ├── widgets/
+---
 
-------------------------------------------------------------------------
+## 📁 Project Structure
 
-GETTING STARTED
+```text
+lib/
+├── main.dart
+├── models/
+├── screens/
+└── widgets/
+```
 
-1.  Clone the repository:
+---
 
-    git clone https://github.com/sinaares/mini_katalog.git
+## 🚀 Getting Started
 
-2.  Navigate to project folder:
+### Prerequisites
+- Flutter SDK installed (and added to PATH)
+- A device or emulator (Android/iOS) — or Chrome for web
 
-    cd mini_katalog
+### Installation
 
-3.  Install dependencies:
+1. Clone the repository:
+```bash
+git clone https://github.com/sinaares/mini_katalog.git
+```
 
-    flutter pub get
+2. Navigate to the project folder:
+```bash
+cd mini_katalog
+```
 
-4.  Run the application:
+3. Install dependencies:
+```bash
+flutter pub get
+```
 
-    flutter run
+4. Run the app:
+```bash
+flutter run
+```
 
-------------------------------------------------------------------------
+---
 
-SCREENSHOTS
+## 🖼 Screenshots
 
+<p align="center">
+  <img src="screenshots/p1.png" width="250" alt="Screenshot 1" />
+  <img src="screenshots/p2.png" width="250" alt="Screenshot 2" />
+  <img src="screenshots/p3.png" width="250" alt="Screenshot 3" />
+</p>
 
+---
 
-mini_katalog/ ├── screenshots/ │ ├── p1.png │ ├──
-p2.png │ ├── p3.png
+## 🎯 Purpose
 
-You can view them directly on GitHub after uploading.
+This project was created for academic/internship practice to strengthen Flutter development skills and improve understanding of mobile UI/UX design principles.
 
-------------------------------------------------------------------------
+---
 
-PURPOSE OF THE PROJECT
+## 👤 Author
 
-This project was developed as part of academic/internship practice to
-improve Flutter development skills and understand mobile UI/UX design
-principles.
+**Sina Hashemi**  
+GitHub: https://github.com/sinaares
 
-------------------------------------------------------------------------
+---
 
-AUTHOR
+## 📄 License
 
-Sina Hashemi GitHub: https://github.com/sinaares
+This repository is open-source and intended for educational use.
 
-------------------------------------------------------------------------
-
-LICENSE
-
-This project is open-source and available for educational purposes.
+> Recommended: add a `LICENSE` file (MIT is common) and update this section accordingly.
